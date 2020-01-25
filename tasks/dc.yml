@@ -8,10 +8,12 @@
   with_items:
     - msiserver
     - wuauserv
+  when: dc_system_updates|bool
 
 - name: Install security updates
   win_updates:
     category_names: SecurityUpdates
+  when: dc_system_updates|bool
 
 - name: Install git
   win_chocolatey:
