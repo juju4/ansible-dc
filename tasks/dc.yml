@@ -4,6 +4,7 @@
   win_service:
     name: "{{ item }}"
     state: started
+    start_mode: manual
   with_items:
     - msiserver
     - wuauserv
