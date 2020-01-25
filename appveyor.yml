@@ -76,7 +76,7 @@ install:
 - cmd: "%CYG_BASH% -lc 'mkdir -p /etc/ansible/roles'"
 - cmd: "%CYG_BASH% -lc 'cp /cygdrive/c/projects/ansible-dc/test/appveyor/ansible.cfg /etc/ansible'"
 - cmd: "%CYG_BASH% -lc 'cp -R /cygdrive/c/projects/ansible-dc /etc/ansible/roles/juju4.dc'"
-- cmd: "%CYG_BASH% -lc 'ansible-galaxy install -p /etc/ansible/roles -r requirements.yml'"
+- cmd: "%CYG_BASH% -lc 'ansible-galaxy install -p /etc/ansible/roles -r /etc/ansible/roles/juju4.dc/requirements.yml'"
 
 build: off
 test_script:
