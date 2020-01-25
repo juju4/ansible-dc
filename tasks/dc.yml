@@ -1,5 +1,13 @@
 ---
 
+- name: Ensure appropriate services are started
+  win_service:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - msiserver
+    - wuauserv
+
 - name: Install security updates
   win_updates:
     category_names: SecurityUpdates
