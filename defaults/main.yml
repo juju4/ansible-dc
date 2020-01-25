@@ -2,4 +2,5 @@
 # defaults file for juju4.dc
 
 dc_system_updates: true
+dc_menu: true
 dc_testing: false

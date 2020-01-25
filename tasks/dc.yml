@@ -53,6 +53,7 @@
 
 - name: DetectionLab Menu
   win_shell: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
+  when: dc_menu|bool
 
 # stupid raw porting from Vagrant for now
 - name: Configure dc host
