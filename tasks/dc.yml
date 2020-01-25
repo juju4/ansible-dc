@@ -52,7 +52,7 @@
     install_args: "ADDLOCAL=ClassicStartMenu"
 
 - name: DetectionLab Menu
-  win_shell: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" "-xml" "c:\vagrant\resources\windows\MenuSettings.xml"'
+  win_shell: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
 
 # stupid raw porting from Vagrant for now
 - name: Configure dc host
