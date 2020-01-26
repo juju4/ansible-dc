@@ -37,6 +37,7 @@
   win_copy:
     src: c:\Tools\PowerSploit\PowerSploit-dev\*
     dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules
+    remote_src: true
   when: dc_redteam_powersploit_dl|bool
 
 - name: Download Atomic Red Team
@@ -51,12 +52,13 @@
   win_unzip:
     src: C:\Users\vagrant\AppData\Local\Temp\atomic_red_team.zip
     dest: C:\Tools\Atomic Red Team
-    creates: c:\Tools\Atomic Red Team\xxx
+    creates: c:\Tools\Atomic Red Team\atomic-red-team-master\README.md
 
 - name: Copy Atomic Red Team modules
   win_copy:
-    src: C:\vagrant\resources\windows\Microsoft.PowerShell_profile.ps1
+    src: C:\DetectionLab\vagrant\resources\windows\Microsoft.PowerShell_profile.ps1
     dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules
+    remote_src: true
 
 - name: Install Atomic requirements
   win_shell: "{{ item }}"
