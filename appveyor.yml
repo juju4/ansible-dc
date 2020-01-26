@@ -87,11 +87,11 @@ for:
   - matrix:
       only:
         - SUITE: default
-    after_test:
-# Test idempotence
+#    after_test:
+# Test idempotence - not enough time
 #    %CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml $ANSIBLE_EXTRA_VARS | tee /tmp/idempotency.log | grep -q "changed=0.*failed=0" && (echo "Idempotence test: pass" && exit 0) || (echo "Idempotence test: fail" && cat /tmp/idempotency.log && exit 0)'
-    - cmd: |
-        %CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml $ANSIBLE_EXTRA_VARS'
+#    - cmd: |
+#        %CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml $ANSIBLE_EXTRA_VARS'
 
 on_failure:
 - cmd: "%CYG_BASH% -lc 'ansible -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory -m setup -vvv localhost'"
