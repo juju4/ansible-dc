@@ -57,6 +57,11 @@
   win_command: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
   when: dc_menu|bool
 
+- name: Ensure etc\hosts is valid
+  win_lineinfile:
+    path: c:\windows\system32\drivers\etc\hosts
+    line: "        192.168.38.105    kolide"
+
 - include: palantir.yml
 
 - include: splunk-uf.yml

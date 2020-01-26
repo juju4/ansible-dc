@@ -2,5 +2,8 @@
 
 - hosts: all
   become_method: runas
+  vars:
+    win_osquery_fleetserver: 'kolide:8412'
+    win_osquery_cert: 'c:\DetectionLab\vagrant\resources\fleet\server.crt'
   roles:
     - juju4.dc
