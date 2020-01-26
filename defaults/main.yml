@@ -6,6 +6,8 @@ dc_detectionlab_stats: true
 
 dc_system_updates: true
 dc_menu: true
+dc_defender_removed: true
+dc_redteam_powersploit_dl: false
 dc_testing: false
 
 dc_splunk_passwd: changeme

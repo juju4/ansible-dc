@@ -13,7 +13,7 @@
   win_unzip:
     src: C:\Users\vagrant\AppData\Local\Temp\mimikatz_trunk.zip
     dest: C:\Tools\Mimikatz
-    creates: c:\Tools\Mimikatz\xxx
+    creates: c:\Tools\Mimikatz\README.md
 
 # FIXME! virus detection
 - name: Download PowerSploit
@@ -23,18 +23,21 @@
     follow_redirects: all
   register: sploitdl
   until: sploitdl is success
+  when: dc_redteam_powersploit_dl|bool
 
 - name: Unzip Powersploit archive
   win_unzip:
     src: C:\Users\vagrant\AppData\Local\Temp\powersploit.zip
     dest: C:\Tools\PowerSploit
     creates: c:\Tools\PowerSploit\xxx
+  when: dc_redteam_powersploit_dl|bool
 
 # FIXME!
 - name: Copy PowerSploit modules
   win_copy:
     src: c:\Tools\PowerSploit\PowerSploit-dev\*
     dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules
+  when: dc_redteam_powersploit_dl|bool
 
 - name: Download Atomic Red Team
   win_get_url:
