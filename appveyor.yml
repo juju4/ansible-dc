@@ -109,6 +109,12 @@ on_failure:
 
 on_finish:
 - ps: |
+    Get-Process
+    True
+- ps: |
+    Get-Service | Where-Object {$_.Status -eq "Running"}
+    True
+- ps: |
     Get-ChildItem -Path "C:\Program Files"
     True
 - ps: |
