@@ -100,9 +100,9 @@ on_failure:
     Get-Content -Path C:\windows\TEMP\chocolatey\KB2999226.Install.evt
     Get-Content -Path C:\windows\TEMP\chocolatey\KB2919442.Install.evt
     True
-- ps: |
-    Get-Content -Path C:\windows\Logs\CBS\CBS.log
-    True
+#- ps: |
+#    Get-Content -Path C:\windows\Logs\CBS\CBS.log
+#    True
 - ps: |
     Get-Content -Path C:\ProgramData\chocolatey\logs\chocolatey.log
     True
@@ -110,6 +110,9 @@ on_failure:
 on_finish:
 - ps: |
     Get-Process
+    True
+- ps: |
+    wmic path win32_process get name,commandline
     True
 - ps: |
     Get-Service | Where-Object {$_.Status -eq "Running"}
