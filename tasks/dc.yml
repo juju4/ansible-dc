@@ -73,6 +73,7 @@
     line: "        192.168.38.105    kolide"
 
 - include: provision.yml
+- include: create-domain.yml
 
 - include: palantir.yml
 
@@ -93,8 +94,8 @@
   args:
     chdir: 'c:\DetectionLab\Vagrant\scripts'
   with_items:
-    - ".\\install-caldera-agent.ps1"
     - ".\\configure-ou.ps1"
     - ".\\configure-wef-gpo.ps1"
+    - ".\\configure-disable-windows-defender-gpo.ps1"
     - 'wevtutil el | Select-String -notmatch "Microsoft-Windows-LiveId" | Foreach-Object {wevtutil cl "$_"}'
     - "Set-SmbServerConfiguration -AuditSmb1Access $true -Force"

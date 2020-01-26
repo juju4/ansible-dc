@@ -57,7 +57,7 @@
 - name: Copy Atomic Red Team modules
   win_copy:
     src: C:\DetectionLab\vagrant\resources\windows\Microsoft.PowerShell_profile.ps1
-    dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules
+    dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell_profile.ps1
     remote_src: true
 
 - name: Install Atomic requirements
