@@ -43,6 +43,7 @@
       - wireshark
       - winpcap
     state: present
+  ignore_errors: {{ _dc_chocolatey_ignore_errors | default(false) }}
 
 - name: Install classic-shell with chocolatey
   win_chocolatey:

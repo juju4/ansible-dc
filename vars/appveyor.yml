@@ -2,3 +2,5 @@
 
 dc_system_updates: false
 dc_menu: true
+
+_dc_chocolatey_ignore_errors: true
