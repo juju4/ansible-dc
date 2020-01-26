@@ -1,0 +1,27 @@
+---
+# https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/create-domain.ps1
+# https://docs.ansible.com/ansible/latest/modules/win_domain_module.html
+
+- name: Create new domain in a new forest on the target host
+  win_domain:
+    create_dns_delegation: no
+    database_path: C:\Windows\NTDS
+    dns_domain_name: windomain.local
+    domain_netbios_name: WINDOMAIN
+    domain_mode: Win2012R2
+    forest_mode: Win2012R2
+    safe_mode_password: "{{ dc_safe_mode_password | default('vagrant') }}"
+    sysvol_path: C:\Windows\SYSVOL
+  notify:
+    - Windows reboot
+
+- name: Set multiple DNS Servers
+  win_dns_client:
+    adapter_names: '*'
+    ipv4_addresses:
+      - 127.0.0.1
+      - 8.8.8.8
+      - 4.4.4.4
+    log_path: C:\dns_log.txt
+
+# FIXME! https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/create-domain.ps1#L71

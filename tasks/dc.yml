@@ -61,10 +61,14 @@
     path: c:\windows\system32\drivers\etc\hosts
     line: "        192.168.38.105    kolide"
 
+- include: provision.yml
+
 - include: palantir.yml
 
 - include: splunk-uf.yml
 - include: splunk-inputsconf.yml
+
+- include: redteam.yml
 
 # stupid raw porting from Vagrant for now
 - name: Configure dc host
@@ -72,9 +76,6 @@
   args:
     chdir: 'c:\DetectionLab\Vagrant\scripts'
   with_items:
-# FIXME! missing curl
-    - ".\\provision.ps1"
-    - ".\\install-redteam.ps1"
     - ".\\install-caldera-agent.ps1"
     - ".\\configure-ou.ps1"
     - ".\\configure-wef-gpo.ps1"

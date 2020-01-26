@@ -1,6 +1,9 @@
 ---
 # defaults file for juju4.dc
 
+# notify DetectionLab for usage statistics
+dc_detectionlab_stats: true
+
 dc_system_updates: true
 dc_menu: true
 dc_testing: false

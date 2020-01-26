@@ -1,0 +1,47 @@
+---
+
+- name: Set timezone to UTC
+  win_timezone:
+    timezone: UTC
+
+- name: Ping DetectionLab server for usage statistics
+  win_uri:
+    url: "https://detectionlab.network/{{ ansible_hostname }}-Ansible"
+    method: GET
+    http_agent: "DetectionLab-{{ ansible_hostname }}-Ansible"
+  when: dc_detectionlab_stats|bool
+
+- name: Disable IPv6 all interfaces
+  win_regedit:
+    key: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
+    name: DisabledComponents
+    data: 255
+    type: dword
+  notify:
+    - Disable IPv6 on all network adapters
+
+- name: Copy DetectionLab background image
+  win_copy:
+    src: c:\DetectionLab\vagrant\resources\windows\background.bmp
+    dest: c:\Program Files\sysinternals\background.bmp
+
+- name: Copy DetectionLab bginfo config
+  win_copy:
+    src: C:\vagrant\scripts\bginfo.bgi
+    dest: c:\Program Files\sysinternals\bginfo.bgi
+
+- name: Enable DetectionLab bginfo
+  win_command: >
+    "c:\\Program Files\\sysinternals\\bginfo.exe" /accepteula "c:\\Program Files\\sysinternals\\bginfo.bgi" /silent /timer:0
+
+- name: Set background to be "fitted" instead of "tiled"
+  win_regedit:
+    key: HKCU:\Control Panel\Desktop
+    value: "{{ item.v }}"
+    data: "{{ item.d }}"
+    datatype: dword
+  with_items:
+    - { v: TileWallpaper, d: '0' }
+    - { v: WallpaperStyle, d: '6' }
+  notify:
+    - Set Task Manager prefs
