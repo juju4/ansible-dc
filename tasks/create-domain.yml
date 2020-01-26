@@ -2,6 +2,14 @@
 # https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/create-domain.ps1
 # https://docs.ansible.com/ansible/latest/modules/win_domain_module.html
 
+- name: Ensure Domain feature is present
+  win_feature:
+    name: AD-Domain-Services
+    state: present
+  notify:
+    - Windows reboot
+
+# FIXME! reboot needed for Install-ADDSForest to be available
 - name: Create new domain in a new forest on the target host
   win_domain:
     create_dns_delegation: no
@@ -10,10 +18,11 @@
     domain_netbios_name: WINDOMAIN
     domain_mode: Win2012R2
     forest_mode: Win2012R2
-    safe_mode_password: "{{ dc_safe_mode_password | default('vagrant') }}"
+    safe_mode_password: "{{ dc_safe_mode_password | default('vagrant_complex#1234') }}"
     sysvol_path: C:\Windows\SYSVOL
   notify:
     - Windows reboot
+  ignore_errors: true
 
 - name: Set multiple DNS Servers
   win_dns_client:
