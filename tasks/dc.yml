@@ -4,11 +4,10 @@
   win_service:
     name: "{{ item }}"
     state: started
-    start_mode: manual
+    start_mode: auto
   with_items:
     - msiserver
     - wuauserv
-  when: dc_system_updates|bool
 
 - name: Install security updates
   win_updates:
