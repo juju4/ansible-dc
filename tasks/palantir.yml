@@ -5,9 +5,9 @@
     name: git
     state: present
 
-- name: Check if existing AutorunsToWinEventLog directory
+- name: Check if existing palantir/windows-event-forwarding directory
   win_stat:
-    path: 'c:\Program Files\AutorunsToWinEventLog'
+    path: 'c:\Program Files\windows-event-forwarding'
   register: dir
 
 - name: Git clone AutorunsToWinEventLog
@@ -18,18 +18,18 @@
 
 - name: Check if AutorunsToWinEventLog Install has been done
   win_stat:
-    path: 'c:\Program Files\AutorunsToWinEventLog\.install_done'
+    path: 'c:\Program Files\windows-event-forwarding\.atwel_install_done'
   register: atwel_install
 
 - block:
     - name: Run AutorunsToWinEventLog install
-      win_shell: 'c:\Program Files\AutorunsToWinEventLog\Install.ps1'
+      win_shell: 'c:\Program Files\windows-event-forwarding\AutorunsToWinEventLog\Install.ps1'
 
     - name: Run AutorunsToWinEventLog scheduled task once post-install
       win_shell: Start-ScheduledTask -TaskName "AutorunsToWinEventLog"
 
     - name: Add marker for AutorunsToWinEventLog install
       win_file:
-        path: 'c:\Program Files\AutorunsToWinEventLog\.install_done'
+        path: 'c:\Program Files\windows-event-forwarding\.atwel_install_done'
         state: touch
   when: not atwel_install.stat.exists
