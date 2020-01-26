@@ -6,7 +6,6 @@
     state: started
     start_mode: auto
   with_items:
-    - msiserver
     - wuauserv
 
 - name: Install security updates
