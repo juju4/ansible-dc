@@ -25,11 +25,13 @@
   win_copy:
     src: c:\DetectionLab\vagrant\resources\windows\background.bmp
     dest: c:\Program Files\sysinternals\background.bmp
+    remote_src: true
 
 - name: Copy DetectionLab bginfo config
   win_copy:
     src: C:\vagrant\scripts\bginfo.bgi
     dest: c:\Program Files\sysinternals\bginfo.bgi
+    remote_src: true
 
 - name: Enable DetectionLab bginfo
   win_command: >
