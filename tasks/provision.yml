@@ -9,6 +9,7 @@
     url: "https://detectionlab.network/{{ ansible_hostname }}-Ansible"
     method: GET
     http_agent: "DetectionLab-{{ ansible_hostname }}-Ansible"
+  ignore_errors: true
   when: dc_detectionlab_stats|bool
 
 - name: Disable IPv6 all interfaces
