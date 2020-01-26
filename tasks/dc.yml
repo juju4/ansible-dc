@@ -56,6 +56,15 @@
   win_command: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
   when: dc_menu|bool
 
+- name: Ensure directories exist
+  win_file:
+    dest: "{{ item }}"
+    state: directory
+  with_items:
+    - C:\Program Files\sysinternals
+    - C:\Users\vagrant\AppData\Local\Temp
+    - C:\Tools\Mimikatz
+
 - name: Ensure etc\hosts is valid
   win_lineinfile:
     path: c:\windows\system32\drivers\etc\hosts
@@ -67,6 +76,11 @@
 
 - include: splunk-uf.yml
 - include: splunk-inputsconf.yml
+
+- name: Ensure Win Defender is not present
+  win_feature:
+    name: Windows-Defender-Features
+    state: absent
 
 - include: redteam.yml
 

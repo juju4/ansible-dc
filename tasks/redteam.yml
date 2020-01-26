@@ -1,19 +1,11 @@
 ---
 # https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/install-redteam.ps1
 
-- name: Ensure directories exist
-  win_file:
-    dest: "{{ item }}"
-    state: directory
-  with_items:
-    - C:\Users\vagrant\AppData\Local\Temp
-    - C:\Tools\Mimikatz
-
 - name: Download mimikatz
   win_get_url:
     url: https://github.com/gentilkiwi/mimikatz/archive/master.zip
     dest: C:\Users\vagrant\AppData\Local\Temp\mimikatz_trunk.zip
-  ignore_errors: true
+    follow_redirects: all
   register: mimidl
   until: mimidl is success
 
@@ -23,11 +15,12 @@
     dest: C:\Tools\Mimikatz
     creates: c:\Tools\Mimikatz\xxx
 
+# FIXME! virus detection
 - name: Download PowerSploit
   win_get_url:
     url: https://github.com/PowerShellMafia/PowerSploit/archive/dev.zip
     dest: C:\Users\vagrant\AppData\Local\Temp\powersploit.zip
-  ignore_errors: true
+    follow_redirects: all
   register: sploitdl
   until: sploitdl is success
 
@@ -47,7 +40,7 @@
   win_get_url:
     url: https://github.com/redcanaryco/atomic-red-team/archive/master.zip
     dest: C:\Users\vagrant\AppData\Local\Temp\atomic_red_team.zip
-  ignore_errors: true
+    follow_redirects: all
   register: atodl
   until: atodl is success
 

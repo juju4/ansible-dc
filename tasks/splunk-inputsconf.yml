@@ -3,7 +3,7 @@
 
 - name: Configure Splunk inputs.conf
   win_copy:
-    src: c:\DetectionLab\vagrant\resources\splunk_forwarder\inputs.conf
+    src: c:\DetectionLab\vagrant\resources\splunk_forwarder\wef_inputs.conf
     dest: C:\Program Files\SplunkUniversalForwarder\etc\apps\SplunkUniversalForwarder\local\inputs.conf
     remote_src: true
   notify:

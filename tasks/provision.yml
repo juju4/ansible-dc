@@ -29,13 +29,13 @@
 
 - name: Copy DetectionLab bginfo config
   win_copy:
-    src: C:\vagrant\scripts\bginfo.bgi
+    src: C:\DetectionLab\vagrant\scripts\bginfo.bgi
     dest: c:\Program Files\sysinternals\bginfo.bgi
     remote_src: true
 
 - name: Enable DetectionLab bginfo
   win_command: >
-    "c:\\Program Files\\sysinternals\\bginfo.exe" /accepteula "c:\\Program Files\\sysinternals\\bginfo.bgi" /silent /timer:0
+    "c:\\ProgramData\\chocolatey\\bin\\bginfo.exe" /accepteula "c:\\Program Files\\sysinternals\\bginfo.bgi" /silent /timer:0
 
 - name: Set background to be "fitted" instead of "tiled"
   win_regedit:
