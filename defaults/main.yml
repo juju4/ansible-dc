@@ -4,3 +4,5 @@
 dc_system_updates: true
 dc_menu: true
 dc_testing: false
+
+dc_splunk_passwd: changeme

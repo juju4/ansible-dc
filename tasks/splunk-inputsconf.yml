@@ -1,0 +1,10 @@
+---
+# https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/install-inputsconf.ps1
+
+- name: Configure Splunk inputs.conf
+  win_copy:
+    src: c:\DetectionLab\vagrant\resources\splunk_forwarder\inputs.conf
+    dest: C:\Program Files\SplunkUniversalForwarder\etc\apps\SplunkUniversalForwarder\local\inputs.conf
+    remote_src: true
+  notify:
+    - restart splunk forwarder

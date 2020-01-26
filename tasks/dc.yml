@@ -56,6 +56,9 @@
 
 - include: AutorunsToWinEventLog.yml
 
+- include: splunk-uf.yml
+- include: splunk-inputsconf.yml
+
 # stupid raw porting from Vagrant for now
 - name: Configure dc host
   win_shell: "{{ item }}"
@@ -66,8 +69,6 @@
     - ".\\provision.ps1"
     - ".\\download_palantir_wef.ps1"
     - ".\\download_palantir_osquery.ps1"
-    - ".\\install-splunkuf.ps1"
-    - ".\\install-inputsconf.ps1"
 #    - "install-utilities.ps1"
     - ".\\install-redteam.ps1"
     - ".\\install-choco-extras.ps1"
