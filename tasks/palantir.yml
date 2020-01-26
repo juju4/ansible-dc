@@ -25,7 +25,7 @@
     - name: Run AutorunsToWinEventLog install
       win_shell: .\Install.ps1
       args:
-        chdir: : c:\Program Files\windows-event-forwarding\AutorunsToWinEventLog
+        chdir: c:\Program Files\windows-event-forwarding\AutorunsToWinEventLog
 
     - name: Run AutorunsToWinEventLog scheduled task once post-install
       win_shell: Start-ScheduledTask -TaskName "AutorunsToWinEventLog"
