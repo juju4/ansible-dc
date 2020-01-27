@@ -25,14 +25,15 @@ environment:
     CYG_SETUP: C:\cygwin64\setup-x86_64.exe
     CYG_CACHE: C:\cygwin64\var\cache\setup
     CYG_BASH: C:\cygwin64\bin\sh
-  - SUITE: default
-    ANSIBLE_VERSION: 2.8.7
-    ANSIBLE_EXTRA_VARS:
-    TARGET: cygwin64
-    CYG_ROOT: C:\cygwin64
-    CYG_SETUP: C:\cygwin64\setup-x86_64.exe
-    CYG_CACHE: C:\cygwin64\var\cache\setup
-    CYG_BASH: C:\cygwin64\bin\sh
+# 2.8 missing win_get_url follow_redirects
+#  - SUITE: default
+#    ANSIBLE_VERSION: 2.8.7
+#    ANSIBLE_EXTRA_VARS:
+#    TARGET: cygwin64
+#    CYG_ROOT: C:\cygwin64
+#    CYG_SETUP: C:\cygwin64\setup-x86_64.exe
+#    CYG_CACHE: C:\cygwin64\var\cache\setup
+#    CYG_BASH: C:\cygwin64\bin\sh
 matrix:
   fast_finish: true
 
