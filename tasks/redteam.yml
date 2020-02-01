@@ -13,7 +13,7 @@
   win_unzip:
     src: C:\Users\vagrant\AppData\Local\Temp\mimikatz_trunk.zip
     dest: C:\Tools\Mimikatz
-    creates: c:\Tools\Mimikatz\README.md
+    creates: c:\Tools\Mimikatz\mimikatz-master\README.md
 
 # FIXME! virus detection
 - name: Download PowerSploit
