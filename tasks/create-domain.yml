@@ -7,12 +7,16 @@
     name: AD-Domain-Services
     state: present
   register: adfeature
+  tags:
+    - predomain
 
 - name: Windows reboot
   win_reboot:
   when: >
     detectionlab_win_reboot is defined and detectionlab_win_reboot|bool
     and adfeature.feature_result.reboot_required is defined and adfeature.feature_result.reboot_required|bool
+  tags:
+    - predomain
 
 # FIXME! reboot needed for Install-ADDSForest to be available
 - name: Create new domain in a new forest on the target host
@@ -28,6 +32,8 @@
   notify:
     - Windows reboot
   ignore_errors: true
+  tags:
+    - predomain
 
 - name: Set multiple DNS Servers
   win_dns_client:
@@ -37,5 +43,7 @@
       - 8.8.8.8
       - 4.4.4.4
     log_path: C:\dns_log.txt
+  tags:
+    - predomain
 
 # FIXME! https://github.com/clong/DetectionLab/blob/master/Vagrant/scripts/create-domain.ps1#L71
