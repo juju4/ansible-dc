@@ -78,6 +78,8 @@ install:
 - cmd: "%CYG_BASH% -lc 'cp /cygdrive/c/projects/ansible-dc/test/appveyor/ansible.cfg /etc/ansible'"
 - cmd: "%CYG_BASH% -lc 'cp -R /cygdrive/c/projects/ansible-dc /etc/ansible/roles/juju4.dc'"
 - cmd: "%CYG_BASH% -lc 'ansible-galaxy install -p /etc/ansible/roles -r /etc/ansible/roles/juju4.dc/requirements.yml'"
+- ps: |
+    . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project inspec
 
 build: off
 test_script:
@@ -124,6 +126,11 @@ on_finish:
 - ps: |
     Get-ChildItem -Path "C:\ProgramData"
     True
+- ps: |
+    Get-NetTCPConnection -State Listen
+    True
+- cmd: c:\opscode\inspec\bin\inspec.bat --chef-license accept || exit 0
+- cmd: c:\opscode\inspec\bin\inspec.bat exec https://github.com/juju4/inspec-detectionlab-dc | tee c:\inspec.log || exit 0
 
 notifications:
 - provider: Email
