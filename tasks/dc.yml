@@ -77,9 +77,6 @@
 
 - include: palantir.yml
 
-- include: splunk-uf.yml
-- include: splunk-inputsconf.yml
-
 - name: Ensure Win Defender is not present
   win_feature:
     name: Windows-Defender-Features
