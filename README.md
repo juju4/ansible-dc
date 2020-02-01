@@ -33,6 +33,16 @@ passed in as parameters) is always nice for users too:
       roles:
          - { role: juju4.dc, x: 42 }
 
+You can test with vagrant
+```
+$ vagrant plugin install vagrant-reload
+$ cd test/vagrant
+$ vagrant up
+$ vagrant provision
+$ vagrant ssh
+```
+Please note that if you run multiple windows VM concurrently, winrm port might change and need to be set manually.
+
 ## Continuous integration
 
 This role is tested in Appveyor.
