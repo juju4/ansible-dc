@@ -15,6 +15,7 @@ environment:
   user_key: c:\projects\ansible-dc\key.pem
   user_pfx: c:\projects\ansible-dc\user.pfx
   CYGWIN: winsymlinks:nativestrict
+  CHEF_LICENSE: accept-no-persist
 
   matrix:
   - SUITE: default
@@ -132,7 +133,6 @@ on_finish:
 - ps: |
     Get-NetTCPConnection -State Listen
     True
-- cmd: c:\opscode\inspec\bin\inspec.bat --chef-license accept || exit 0
 - cmd: c:\opscode\inspec\bin\inspec.bat exec https://github.com/juju4/inspec-detectionlab-dc | tee c:\inspec.log || exit 0
 
 notifications:
