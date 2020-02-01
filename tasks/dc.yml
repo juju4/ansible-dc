@@ -69,7 +69,8 @@
 - name: Ensure etc\hosts is valid
   win_lineinfile:
     path: c:\windows\system32\drivers\etc\hosts
-    line: "        192.168.38.105    kolide"
+    regexp: '^\s*192.168.38.105    kolide'
+    line: '        192.168.38.105    kolide'
 
 - include: provision.yml
 - include: create-domain.yml
