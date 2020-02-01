@@ -84,7 +84,10 @@ install:
 build: off
 test_script:
 - cmd: "%CYG_BASH% -lc 'ansible-playbook /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml --syntax-check'"
-- cmd: "%CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml -vvv $ANSIBLE_EXTRA_VARS'"
+- cmd: "%CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml -vvv $ANSIBLE_EXTRA_VARS --tags=predomain'"
+- ps: Restart-Computer -Force
+- ps: Start-Sleep -s 10
+- cmd: "%CYG_BASH% -lc 'ansible-playbook -i /cygdrive/c/projects/ansible-dc/test/appveyor/inventory /cygdrive/c/projects/ansible-dc/test/integration/$SUITE/default.yml -vvv $ANSIBLE_EXTRA_VARS --skip-tags=predomain'"
 
 for:
   - matrix:
