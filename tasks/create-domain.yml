@@ -6,8 +6,13 @@
   win_feature:
     name: AD-Domain-Services
     state: present
-  notify:
-    - Windows reboot
+  register: adfeature
+
+- name: Windows reboot
+  win_reboot:
+  when: >
+    detectionlab_win_reboot is defined and detectionlab_win_reboot|bool
+    and adfeature.feature_result.reboot_required is defined and adfeature.feature_result.reboot_required|bool
 
 # FIXME! reboot needed for Install-ADDSForest to be available
 - name: Create new domain in a new forest on the target host
