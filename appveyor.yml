@@ -132,6 +132,9 @@ on_finish:
     Get-ChildItem -Path "C:\ProgramData"
     True
 - ps: |
+    Get-ChildItem -Path "C:\Windows\SYSVOL\sysvol\windomain.local\Policies" -Recurse
+    True
+- ps: |
     Get-NetTCPConnection -State Listen
     True
 - cmd: c:\opscode\inspec\bin\inspec.bat exec https://github.com/juju4/inspec-detectionlab-dc | tee c:\inspec.log || exit 0
