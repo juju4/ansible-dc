@@ -44,7 +44,7 @@
 - name: Enable DetectionLab bginfo
   win_command: >
     "c:\\ProgramData\\chocolatey\\bin\\bginfo.exe" /accepteula "c:\\Program Files\\sysinternals\\bginfo.bgi" /silent /timer:0
-  when: not ("BGInfo.bmp" in wallpaper.value)
+  when: wallpaper.value is defined and not ("BGInfo.bmp" in wallpaper.value)
 
 - name: Set background to be "fitted" instead of "tiled"
   win_regedit:
