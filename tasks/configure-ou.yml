@@ -3,6 +3,8 @@
 - name: Check if Servers OU exists
   win_shell: Get-ADOrganizationalUnit -Identity 'OU=Servers,DC=windomain,DC=local'
   register: servers_ou
+  changed_when: false
+  ignore_errors: true
 - debug: var=servers_ou
 
 - name: Creating Servers OU
@@ -12,6 +14,8 @@
 - name: Check if Workstations OU exists
   win_shell: Get-ADOrganizationalUnit -Identity 'OU=Workstations,DC=windomain,DC=local'
   register: servers_ou
+  changed_when: false
+  ignore_errors: true
 - debug: var=ws_ou
 
 - name: Creating Workstations OU
