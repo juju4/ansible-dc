@@ -17,7 +17,7 @@
     creates: "{{ GPOCreates }}"
 
 - include: "link-gpo.yml OU={{ item }}"
-  with_items: "{{ OU_list }}"
+  with_items: "{{ OU_list | default([]) }}"
 
 - name: Set fact for WEF custom event channel permissions GPO
   set_fact:
@@ -32,7 +32,7 @@
     creates: "{{ GPOCreates }}"
 
 - include: "link-gpo.yml OU={{ item }}"
-  with_items: "{{ OU_list }}"
+  with_items: "{{ OU_list | default([]) }}"
 
 - name: Run gpupdate
   win_command: gpupdate /force
