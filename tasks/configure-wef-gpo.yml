@@ -12,7 +12,7 @@
 
 - name: Import WEF GPO
   win_shell: >
-    Import-GPO -BackupGpoName {{ GPOName }} -Path "{{ GPOImportPath }}" -TargetName {{ GPOName }} -CreateIfNeeded
+    Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
   args:
     creates: "{{ GPOCreates }}"
 
@@ -27,7 +27,7 @@
 
 - name: Import WEF GPO
   win_shell: >
-    Import-GPO -BackupGpoName {{ GPOName }} -Path "{{ GPOImportPath }}" -TargetName {{ GPOName }} -CreateIfNeeded
+    Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
   args:
     creates: "{{ GPOCreates }}"
 
