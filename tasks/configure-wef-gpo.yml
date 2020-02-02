@@ -10,11 +10,16 @@
       - "OU=Domain Controllers,dc=windomain,dc=local"
       - "OU=Workstations,dc=windomain,dc=local"
 
+- name: Check current GPOs
+  win_shell: >
+    Get-GPO -All
+  register: gpos
+  changed_when: false
+
 - name: Import WEF GPO
   win_shell: >
     Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
-  args:
-    creates: "{{ GPOCreates }}"
+  when: not (gpos.stdout|string and GPOName|lower in gpos.stdout|lower)
 
 - include: "link-gpo.yml OU={{ item }}"
   with_items: "{{ OU_list | default([]) }}"
