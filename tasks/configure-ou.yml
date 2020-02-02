@@ -1,5 +1,19 @@
 ---
 
+- name: Force DNS resolution of the domain
+  win_command: "{{ item }}"
+  with_items:
+    - ping /n 1 dc.windomain.local
+    - ping /n 1 windomain.local
+  changed_when: false
+
+- name: Check if root OU exists
+  win_shell: Get-ADOrganizationalUnit -Identity 'DC=windomain,DC=local'
+  register: root_ou
+  changed_when: false
+  ignore_errors: true
+- debug: var=root_ou
+
 - name: Check if Servers OU exists
   win_shell: Get-ADOrganizationalUnit -Identity 'OU=Servers,DC=windomain,DC=local'
   register: servers_ou
