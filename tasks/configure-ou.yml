@@ -27,7 +27,7 @@
 
 - name: Check if Workstations OU exists
   win_shell: Get-ADOrganizationalUnit -Identity 'OU=Workstations,DC=windomain,DC=local'
-  register: servers_ou
+  register: ws_ou
   changed_when: false
   ignore_errors: true
 - debug: var=ws_ou
