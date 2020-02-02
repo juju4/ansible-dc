@@ -38,6 +38,8 @@
     path: HKCU:\Control Panel\Desktop\WallPaper
   register: wallpaper
 
+- debug: var=wallpaper
+
 # FIXME! executing fine but no change of background. ok if manual
 - name: Enable DetectionLab bginfo
   win_command: >
