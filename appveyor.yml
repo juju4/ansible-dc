@@ -39,6 +39,7 @@ matrix:
   fast_finish: true
 
 install:
+- cmd: ipconfig /all
 # setup winrm
 - ps: net user /Y /add $env:winrm_user $env:winrm_password
 - ps: net localgroup administrators $env:winrm_user /add

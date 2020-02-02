@@ -10,4 +10,8 @@ dc_defender_removed: true
 dc_redteam_powersploit_dl: false
 dc_testing: false
 
+# default but may be necessary to change in some cases
+#dc_int_ip_address: 192.168.38.102
+#dc_int_ip_address: w.x.y.z
+
 dc_splunk_passwd: changeme

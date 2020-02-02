@@ -73,7 +73,7 @@
     line: "{{ item.l }}"
   with_items:
     - { re: '^\s*192.168.38.105    kolide', l: "        192.168.38.105    kolide\n" }
-    - { re: '^\s*192.168.38.102    dc.windomain.local', l: "        192.168.38.102    dc.windomain.local\n" }
+    - { re: "^\s*{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local", l: "        {{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local\n" }
 
 - include: provision.yml
 - include: create-domain.yml
