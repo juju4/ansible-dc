@@ -60,8 +60,10 @@
     dest: c:\windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell_profile.ps1
     remote_src: true
 
+- name: Ensure NuGet is present
+  win_shell: Install-PackageProvider -Name NuGet
+
 - name: Install Atomic requirements
-  win_shell: "{{ item }}"
-  with_items:
-    - Install-PackageProvider -Name NuGet -force
-    - Install-Module -Name powershell-yaml -Force
+  win_psmodule:
+    name: powershell-yaml
+    state: present
