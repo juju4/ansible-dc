@@ -2,17 +2,17 @@
 
 - name: Check if {{ GPOName }} GPO is linked
   win_shell: |
-    $gPLinks = Get-ADOrganizationalUnit -Server "dc.windomain.local" -Identity {{ OU }} -Properties name,distinguishedName, gPLink, gPOptions
+    $gPLinks = Get-ADOrganizationalUnit -Server "dc.windomain.local" -Identity "{{ OU }}" -Properties name,distinguishedName, gPLink, gPOptions
     $gPLinks.LinkedGroupPolicyObjects
   changed_when: false
   register: adou
 
 - name: Get GPO path
-  win_shell: "Get-GPO -Name {{ GPOName }}"
+  win_shell: "Get-GPO -Name \"{{ GPOName }}\""
   changed_when: false
   register: gpopath
 
 - name: Linking GPO
   win_shell: >
-    New-GPLink -Name {{ GPOName }} -Target {{ OU }} -Enforced yes
+    New-GPLink -Name "{{ GPOName }}" -Target "{{ OU }}" -Enforced yes
   when: not (gpopath.stdout in adout.stdout)
