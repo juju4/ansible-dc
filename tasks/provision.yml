@@ -33,16 +33,23 @@
     dest: c:\Program Files\sysinternals\bginfo.bgi
     remote_src: true
 
+- name: Check current wallpaper if Bginfo
+  win_reg_stat:
+    path: HKCU:\Control Panel\Desktop\WallPaper
+  register: wallpaper
+
+# FIXME! executing fine but no change of background. ok if manual
 - name: Enable DetectionLab bginfo
   win_command: >
     "c:\\ProgramData\\chocolatey\\bin\\bginfo.exe" /accepteula "c:\\Program Files\\sysinternals\\bginfo.bgi" /silent /timer:0
+  when: not ("BGInfo.bmp" in wallpaper.value)
 
 - name: Set background to be "fitted" instead of "tiled"
   win_regedit:
     key: HKCU:\Control Panel\Desktop
     value: "{{ item.v }}"
     data: "{{ item.d }}"
-    datatype: dword
+    datatype: string
   with_items:
     - { v: TileWallpaper, d: '0' }
     - { v: WallpaperStyle, d: '6' }
