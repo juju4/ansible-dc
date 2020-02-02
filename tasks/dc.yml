@@ -69,8 +69,11 @@
 - name: Ensure etc\hosts is valid
   win_lineinfile:
     path: c:\windows\system32\drivers\etc\hosts
-    regexp: '^\s*192.168.38.105    kolide'
-    line: '        192.168.38.105    kolide'
+    regexp: "{{ item.re }}"
+    line: "{{ item.l }}"
+  with_items:
+    - { re: '^\s*192.168.38.105    kolide', l: "        192.168.38.105    kolide\n" }
+    - { re: '^\s*192.168.38.102    dc.windomain.local', l: "        192.168.38.102    dc.windomain.local\n" }
 
 - include: provision.yml
 - include: create-domain.yml
