@@ -1,0 +1,11 @@
+---
+
+- name: Set fact for Windows Defender GPO
+  set_fact:
+    GPOName: 'Disable Windows Defender'
+    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\disable_windows_defender'
+    OU_list:
+      - "OU=Servers,dc=windomain,dc=local"
+      - "OU=Workstations,dc=windomain,dc=local"
+
+- include: gpo.yml

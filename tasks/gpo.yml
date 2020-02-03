@@ -1,0 +1,17 @@
+---
+
+- name: Check current GPOs
+  win_shell: >
+    Get-GPO -All
+  register: gpos
+  changed_when: false
+
+- name: Import {{ GPOName }} GPO
+  win_shell: >
+    Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
+  when: not (gpos.stdout|string and GPOName|lower in gpos.stdout|lower)
+  notify:
+    - Run gpupdate
+
+- include: "link-gpo.yml OU={{ item }}"
+  with_items: "{{ OU_list | default([]) }}"

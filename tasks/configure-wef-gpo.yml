@@ -4,40 +4,16 @@
   set_fact:
     GPOName: 'Windows Event Forwarding Server'
     GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\wef_configuration'
-    GPOCreates: 'C:\Windows\SYSVOL\sysvol\windomain.local\Policies\{F523FD69-7E4C-4315-93D0-557089F1B8A1}\GPT.ini'
     OU_list:
       - "OU=Servers,dc=windomain,dc=local"
       - "OU=Domain Controllers,dc=windomain,dc=local"
       - "OU=Workstations,dc=windomain,dc=local"
 
-- name: Check current GPOs
-  win_shell: >
-    Get-GPO -All
-  register: gpos
-  changed_when: false
-
-- name: Import WEF GPO
-  win_shell: >
-    Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
-  when: not (gpos.stdout|string and GPOName|lower in gpos.stdout|lower)
-
-- include: "link-gpo.yml OU={{ item }}"
-  with_items: "{{ OU_list | default([]) }}"
+- include: gpo.yml
 
 - name: Set fact for WEF custom event channel permissions GPO
   set_fact:
     GPOName: 'Custom Event Channel Permissions'
     GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\wef_configuration'
-    GPOCreates: 'C:\Windows\SYSVOL\sysvol\windomain.local\Policies\{1C916D7C-52F4-4EB4-8EA7-081349532B3C}\GPT.ini'
 
-- name: Import WEF GPO
-  win_shell: >
-    Import-GPO -BackupGpoName "{{ GPOName }}" -Path "{{ GPOImportPath }}" -TargetName "{{ GPOName }}" -CreateIfNeeded
-  args:
-    creates: "{{ GPOCreates }}"
-
-- include: "link-gpo.yml OU={{ item }}"
-  with_items: "{{ OU_list | default([]) }}"
-
-- name: Run gpupdate
-  win_command: gpupdate /force
+- include: gpo.yml

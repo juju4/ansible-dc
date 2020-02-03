@@ -14,3 +14,6 @@
 - name: Windows reboot
   win_reboot:
   when: detectionlab_win_reboot is defined and detectionlab_win_reboot|bool
+
+- name: Run gpupdate
+  win_command: gpupdate /force

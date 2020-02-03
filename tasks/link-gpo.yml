@@ -17,3 +17,5 @@
   win_shell: >
     New-GPLink -Name "{{ GPOName }}" -Target "{{ OU }}" -Enforced yes
   when: not (adout.stdout|string and gpopath.stdout|string and gpopath.stdout|lower|replace("\r\n", "") in adout.stdout|lower)
+  notify:
+    - Run gpupdate

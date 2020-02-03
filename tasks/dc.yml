@@ -52,9 +52,20 @@
     state: present
     install_args: "ADDLOCAL=ClassicStartMenu"
 
-- name: DetectionLab Menu
-  win_command: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
-  when: dc_menu|bool
+- name: Check if DetectionLab Menu Install has been done
+  win_stat:
+    path: 'c:\Program Files\Classic Shell\.menu_install_done'
+  register: menu_install
+
+- block:
+    - name: DetectionLab Menu
+      win_command: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
+
+    - name: Add marker for DetectionLab Menu install
+      win_file:
+        path: 'c:\Program Files\Classic Shell\.menu_install_done'
+        state: touch
+  when: not menu_install.stat.exists and dc_menu|bool
 
 - name: Ensure directories exist
   win_file:
@@ -72,13 +83,21 @@
     regexp: "{{ item.re }}"
     line: "{{ item.l }}"
   with_items:
-    - { re: '^\s*192.168.38.105    kolide', l: "        192.168.38.105    kolide\n" }
-    - { re: "^\\s*{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local", l: "        {{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local\n" }
+    - { re: '^192.168.38.105    kolide', l: "192.168.38.105    kolide" }
+    - { re: "^{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local",
+        l: "{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local"
+      }
 
 - include: provision.yml
 - include: create-domain.yml
 - include: configure-ou.yml
 - include: configure-wef-gpo.yml
+- include: configure-powershelllogging-gpo.yml
+- include: configure-auditing-gpo.yml
+- include: configure-disable-windows-defender-gpo.yml
+- include: smb.yml
+
+- meta: flush_handlers
 
 - include: palantir.yml
 
@@ -90,12 +109,17 @@
 
 - include: redteam.yml
 
-# FIXME! OU/GPO configuration requiring DC live, meaning reboot after promote
-- name: Configure dc host
-  win_shell: "{{ item }}"
-  args:
-    chdir: 'c:\DetectionLab\Vagrant\scripts'
-  with_items:
-    - ".\\configure-disable-windows-defender-gpo.ps1"
-    - 'wevtutil el | Select-String -notmatch "Microsoft-Windows-LiveId" | Foreach-Object {wevtutil cl "$_"}'
-    - "Set-SmbServerConfiguration -AuditSmb1Access $true -Force"
+- name: Check if Microsoft-Windows-LiveId activity cleaned
+  win_stat:
+    path: 'c:\Program Files\.winliveid_cleaning_done'
+  register: winliveid_cleaning
+
+- block:
+    - name: Cleaning Microsoft-Windows-LiveId event log
+      win_shell: 'wevtutil el | Select-String -notmatch "Microsoft-Windows-LiveId" | Foreach-Object {wevtutil cl "$_"}'
+
+    - name: Add marker for Microsoft-Windows-LiveId activity cleaning
+      win_file:
+        path: 'c:\Program Files\.winliveid_cleaning_done'
+        state: touch
+  when: not winliveid_cleaning.stat.exists

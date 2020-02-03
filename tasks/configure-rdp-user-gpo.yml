@@ -1,0 +1,11 @@
+---
+
+- name: Set fact for RDP User GPO
+  set_fact:
+    GPOName: 'Allow Domain Users RDP'
+    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\rdp_users'
+    OU_list:
+      - "OU=Servers,dc=windomain,dc=local"
+      - "OU=Workstations,dc=windomain,dc=local"
+
+- include: gpo.yml
