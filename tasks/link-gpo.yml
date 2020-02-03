@@ -1,6 +1,6 @@
 ---
 
-- name: Check if {{ GPOName }} GPO is linked
+- name: Check if {{ GPOName }} GPO is linked to {{ OU }}
   win_shell: |
     $gPLinks = Get-ADOrganizationalUnit -Identity "{{ OU }}" -Properties name,distinguishedName, gPLink, gPOptions
     $gPLinks.LinkedGroupPolicyObjects
@@ -16,6 +16,6 @@
 - name: Linking GPO
   win_shell: >
     New-GPLink -Name "{{ GPOName }}" -Target "{{ OU }}" -Enforced yes
-  when: not (adout.stdout|string and gpopath.stdout|string and gpopath.stdout|lower|replace("\r\n", "") in adout.stdout|lower)
+  when: not (adout.stdout|string and gpopath.stdout|string and gpopath.stdout_lines|lower in adout.stdout|lower)
   notify:
     - Run gpupdate
