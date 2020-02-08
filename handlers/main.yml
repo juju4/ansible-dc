@@ -9,7 +9,7 @@
   win_shell: Get-NetAdapterBinding -ComponentID ms_tcpip6 | ForEach-Object {Disable-NetAdapterBinding -Name $_.Name -ComponentID ms_tcpip6}
 
 - name: Set Task Manager prefs
-  win_command: "reg import \"{{ detectionlab_gitroot }}\\vagrant\\resources\\windows\\TaskManager.reg\"'"
+  win_command: "reg import \"{{ detectionlab_gitroot }}\\vagrant\\resources\\windows\\TaskManager.reg\""
 
 - name: Windows reboot
   win_reboot:
