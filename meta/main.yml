@@ -16,7 +16,7 @@ galaxy_info:
 dependencies:
   - juju4.win-osquery
   - juju4.win-sysmon
-  - juju4.win-applocker
-  - juju4.win-audit
-  - juju4.win-eventlog
-  - juju4.win-powershell
+  # - juju4.win-applocker
+  # - juju4.win-audit
+  # - juju4.win-eventlog
+  # - juju4.win-powershell
