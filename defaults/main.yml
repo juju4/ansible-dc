@@ -2,7 +2,7 @@
 # defaults file for juju4.dc
 
 # notify DetectionLab for usage statistics
-dc_detectionlab_stats: true
+detectionlab_stats: true
 
 detectionlab_gitroot: 'c:\DetectionLab'
 dc_system_updates: true
