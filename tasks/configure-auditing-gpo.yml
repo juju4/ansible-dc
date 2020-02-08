@@ -3,7 +3,7 @@
 - name: Set fact for Domain Controllers Enhanced Auditing Policy GPO
   set_fact:
     GPOName: 'Domain Controllers Enhanced Auditing Policy'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\Domain_Controllers_Enhanced_Auditing_Policy'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\Domain_Controllers_Enhanced_Auditing_Policy"
     OU_list:
       - "ou=Domain Controllers,dc=windomain,dc=local"
 
@@ -12,7 +12,7 @@
 - name: Set fact for Servers Enhanced Auditing Policy
   set_fact:
     GPOName: 'Servers Enhanced Auditing Policy'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\Servers_Enhanced_Auditing_Policy'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\Servers_Enhanced_Auditing_Policy"
     OU_list:
       - "OU=Servers,dc=windomain,dc=local"
 
@@ -21,7 +21,7 @@
 - name: Set fact for Workstations Enhanced Auditing Policy
   set_fact:
     GPOName: 'Workstations Enhanced Auditing Policy'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\Workstations_Enhanced_Auditing_Policy'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\Workstations_Enhanced_Auditing_Policy"
     OU_list:
       - "OU=Workstations,dc=windomain,dc=local"
 

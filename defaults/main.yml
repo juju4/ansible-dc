@@ -4,6 +4,7 @@
 # notify DetectionLab for usage statistics
 dc_detectionlab_stats: true
 
+detectionlab_gitroot: 'c:\DetectionLab'
 dc_system_updates: true
 dc_menu: true
 dc_defender_removed: true

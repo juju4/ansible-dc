@@ -23,13 +23,13 @@
 
 - name: Copy DetectionLab background image
   win_copy:
-    src: c:\DetectionLab\vagrant\resources\windows\background.bmp
+    src: "{{ detectionlab_gitroot }}\\vagrant\\resources\\windows\\background.bmp"
     dest: c:\Program Files\sysinternals\background.bmp
     remote_src: true
 
 - name: Copy DetectionLab bginfo config
   win_copy:
-    src: C:\DetectionLab\vagrant\scripts\bginfo.bgi
+    src: "{{ detectionlab_gitroot }}\\vagrant\\scripts\\bginfo.bgi"
     dest: c:\Program Files\sysinternals\bginfo.bgi
     remote_src: true
 

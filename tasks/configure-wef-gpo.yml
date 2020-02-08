@@ -3,7 +3,7 @@
 - name: Set fact for WEF GPO
   set_fact:
     GPOName: 'Windows Event Forwarding Server'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\wef_configuration'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\wef_configuration"
     OU_list:
       - "OU=Servers,dc=windomain,dc=local"
       - "OU=Domain Controllers,dc=windomain,dc=local"
@@ -14,6 +14,6 @@
 - name: Set fact for WEF custom event channel permissions GPO
   set_fact:
     GPOName: 'Custom Event Channel Permissions'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\wef_configuration'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\wef_configuration"
 
 - include: gpo.yml

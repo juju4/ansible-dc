@@ -20,11 +20,11 @@
 
 - name: Check if existing DetectionLab directory
   win_stat:
-    path: 'c:\DetectionLab'
+    path: "{{ detectionlab_gitroot }}"
   register: dir
 
 - name: Git clone Detectionlab
-  win_shell: git clone https://github.com/clong/DetectionLab.git
+  win_shell: "git clone https://github.com/clong/DetectionLab.git \"{{ detectionlab_gitroot }}\""
   args:
     chdir: 'c:\'
   when: not dir.stat.exists
@@ -59,7 +59,7 @@
 
 - block:
     - name: DetectionLab Menu
-      win_command: '"C:\Program Files\Classic Shell\ClassicStartMenu.exe" -xml c:\DetectionLab\vagrant\resources\windows\MenuSettings.xml'
+      win_command: "\"C:\\Program Files\\Classic Shell\\ClassicStartMenu.exe\" -xml \"{{ detectionlab_gitroot }}\\vagrant\\resources\\windows\\MenuSettings.xml\""
 
     - name: Add marker for DetectionLab Menu install
       win_file:

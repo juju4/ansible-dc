@@ -3,7 +3,7 @@
 - name: Set fact for Powershell Logging
   set_fact:
     GPOName: 'Powershell Logging'
-    GPOImportPath: 'c:\DetectionLab\vagrant\resources\GPO\powershell_logging'
+    GPOImportPath: "{{ detectionlab_gitroot }}\\vagrant\\resources\\GPO\\powershell_logging"
     OU_list:
       - "ou=Domain Controllers,dc=windomain,dc=local"
       - "OU=Servers,dc=windomain,dc=local"
