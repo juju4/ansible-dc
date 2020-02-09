@@ -1,5 +1,9 @@
 [![Build Status - Master](https://travis-ci.org/juju4/ansible-dc.svg?branch=master)](https://travis-ci.org/juju4/ansible-dc)
 [![Build Status - Devel](https://travis-ci.org/juju4/ansible-dc.svg?branch=devel)](https://travis-ci.org/juju4/ansible-dc/branches)
+
+[![Appveyor - Master](https://ci.appveyor.com/api/projects/status/9n7p3hqhb8d4n2aq?svg=true)](https://ci.appveyor.com/project/juju4/ansible-dc)
+![Appveyor - Devel](https://ci.appveyor.com/api/projects/status/9n7p3hqhb8d4n2aq/branch/devel?svg=true)
+
 # DetectionLab Windows DC ansible role
 
 Setup a Windows Domain Controller for [DetectionLab](https://github.com/clong/DetectionLab)
