@@ -16,6 +16,6 @@
 - name: Linking GPO
   win_shell: >
     New-GPLink -Name "{{ GPOName }}" -Target "{{ OU }}" -Enforced yes
-  when: not (adout.stdout|string and gpopath.stdout|string and gpopath.stdout_lines|lower in adout.stdout|lower)
+  when: not (adout.stdout|string and gpopath.stdout|string and gpopath.stdout_lines[0]|lower in adout.stdout|lower)
   notify:
     - Run gpupdate
