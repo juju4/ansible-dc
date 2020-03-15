@@ -4,7 +4,9 @@
 
 - name: Ensure Domain feature is present
   win_feature:
-    name: AD-Domain-Services
+    name:
+      - AD-Domain-Services
+      - RSAT-ADDS
     state: present
   register: adfeature
   tags:
@@ -12,6 +14,7 @@
 
 - name: Windows reboot
   win_reboot:
+    post_reboot_delay: 120
   when: >
     detectionlab_win_reboot is defined and detectionlab_win_reboot|bool
     and adfeature.feature_result.reboot_required is defined and adfeature.feature_result.reboot_required|bool
@@ -29,6 +32,7 @@
     forest_mode: Win2012R2
     safe_mode_password: "{{ dc_safe_mode_password | default('vagrant_complex#1234') }}"
     sysvol_path: C:\Windows\SYSVOL
+  register: created
   notify:
     - Windows reboot
   ignore_errors: true
@@ -43,6 +47,15 @@
       - 8.8.8.8
       - 4.4.4.4
     log_path: C:\dns_log.txt
+  tags:
+    - predomain
+
+- name: Windows reboot
+  win_reboot:
+    post_reboot_delay: 120
+  when: >
+    detectionlab_win_reboot is defined and detectionlab_win_reboot|bool
+    and created.reboot_required is defined and created.reboot_required|bool
   tags:
     - predomain
 
