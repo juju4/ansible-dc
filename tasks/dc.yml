@@ -84,8 +84,8 @@
     line: "{{ item.l }}"
   with_items:
     - { re: '^192.168.38.105    kolide', l: "192.168.38.105    kolide" }
-    - { re: "^{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local",
-        l: "{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local"
+    - { re: "^{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local windomain.local",
+        l: "{{ dc_int_ip_address | default('192.168.38.102') }}    dc.windomain.local windomain.local"
       }
 
 - include: provision.yml
