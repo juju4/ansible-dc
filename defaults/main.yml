@@ -9,6 +9,7 @@ dc_system_updates: true
 dc_menu: true
 dc_defender_removed: true
 dc_redteam_powersploit_dl: false
+detectionlab_redteam_powershell_yaml_install: false
 dc_testing: false
 
 # default but may be necessary to change in some cases
