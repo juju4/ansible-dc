@@ -123,3 +123,8 @@
         path: 'c:\Program Files\.winliveid_cleaning_done'
         state: touch
   when: not winliveid_cleaning.stat.exists
+
+- name: Create URL Shortcut for Kolide Fleet
+  win_shortcut:
+    src: "https://192.168.39.105:{{ kolide_port }}/login"
+    dest: '%Public%\Desktop\Fleet.url'
