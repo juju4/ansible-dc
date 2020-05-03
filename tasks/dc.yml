@@ -124,7 +124,11 @@
         state: touch
   when: not winliveid_cleaning.stat.exists
 
-- name: Create URL Shortcut for Kolide Fleet
+- name: Create URL Shortcut for Kolide Fleet, Splunk...
   win_shortcut:
-    src: "https://192.168.39.105:{{ kolide_port }}/login"
-    dest: '%Public%\Desktop\Fleet.url'
+    src: "{{ item.u }}"
+    dest: "%Public%\Desktop\{{ item.n }}.url"
+  with_items:
+    - { n: Fleet, u: "https://192.168.39.105:{{ kolide_port }}/login" }
+    - { n: Splunk, u: "https://192.168.39.105:8000" }
+    - { n: MsAta, u: "https://192.168.39.103" }
