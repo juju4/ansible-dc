@@ -129,6 +129,6 @@
     src: "{{ item.u }}"
     dest: "%Public%\\Desktop\\{{ item.n }}.url"
   with_items:
-    - { n: Fleet, u: "https://192.168.39.105:{{ kolide_port }}/login" }
+    - { n: Fleet, u: "https://192.168.39.105:{{ kolide_port | default('8412') }}/login" }
     - { n: Splunk, u: "https://192.168.39.105:8000" }
     - { n: MsAta, u: "https://192.168.39.103" }
